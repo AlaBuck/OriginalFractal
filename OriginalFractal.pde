@@ -1,29 +1,25 @@
+    int r = (int)(Math.random()*256);
+    int g = (int)(Math.random()*256);
+    int b = (int)(Math.random()*56)+200;
 public void setup()
 {
-  size(750, 750);
+  size(800, 800);
   background(0);
 }
 public void draw()
 {
-  rose(width/2,width/2,width);
+  SkullFractalPattern(width/2+100, width/2+200, (float)600);
 }
-public void mouseDragged()//optional
-{
 
-}
-public void rose(int x, int y, int len) 
+public void SkullFractalPattern(int x, int y, float len) 
 {
-  if(len<(0.0000000000000000000000001)){
-    ellipse(x, y, 20, 20);
-    //triangle(x, y, x+len, y, x+(len/2), y+len);
-  } else {
-       fill(250,50,50); 
-   //    rose(x,y,4*len/5);
-       ellipse(x, y, len, len);
-   //    ellipse(x/4,y/4,len,len);
-   //    ellipse(3*x/4,3*x/4,len,len);
-      rose(x,y,4*len/5); 
-       //sierpinski(x+len/2, y, len/2);
-       //sierpinski(x+len/4,y+len/2,len/2);
-  }
+    fill(r,g,b);
+    triangle(x, y-len/2, x+2*len/2, y-len/2, x+len/2,y+len/2);
+    if(len>20){
+      for (int i = 2; i <= 64; i *= 2) {
+        SkullFractalPattern(x - (int)len/i, y, len/i);
+        SkullFractalPattern(x, y-(int)len/i, len/i);
+        SkullFractalPattern(x, y, len/i);
+    }
+}
 }
